@@ -9,8 +9,8 @@
   <script>
     var recordText = function(){
       var temp = document.getElementById('myinput').value;
-      localStorage.setItem('liquValue', temp);
-      $("#resultLoad1").text("Loaded!");
+      localStorage.setItem('TextEntryName', temp);
+      $("#resultLoad1").text("Text loaded!");
     }
 
     $( document ).ready(function() {
@@ -18,8 +18,8 @@
         if ( fileInput.files && fileInput.files[0] ) {
           var FR= new FileReader();
           FR.onload = function(e) {
-            $("#resultLoad2").text("Loaded!");
-            localStorage.setItem('liquImage', e.target.result);
+            $("#resultLoad2").text("Image loaded!");
+            localStorage.setItem('ImageEntryName', e.target.result);
           };       
           FR.readAsDataURL( fileInput.files[0] );
         }
@@ -55,15 +55,15 @@
 <body>
 
   <div class="container">
-    <h2>В LocalStorage</h2>
+    <h2>To LocalStorage</h2>
       <section>
         <input type="text" id="myinput" placeholder="Input any text">
-        <button onclick="recordText();">Load Text in LS</button>
+        <button onclick="recordText();">Load Text</button>
         <div id="resultLoad1"></div>
       </section>
       <section>
         <input id="image_file" type="file">
-        <button id="loadImage">Load Image in LS</button>
+        <button id="loadImage">Load Image</button>
         <div id="resultLoad2"></div>
         <br><br><br>
 		<a href="index2.html">index2</a>
