@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>LocalStorage Edit</title>
+    <link rel="stylesheet" href="css/style.css">
+	
+	<script type="text/javascript">
+		function saveNote()
+{  
+  var name = document.getElementById('notename').value;
+   /* creating a variable to store the text entry header */
+  var content = document.getElementById('notecontent').value;
+   /* creating a variable to store the text entry */
+  if(content == '')
+  {
+    alert('enter valid note text');
+     /* a warning message if you do not specify an entry subject */
+  }
+  else 
+  {
+   if (name == 0)
+    {
+      alert('enter valid note name');
+       /* a warning message if the text entry header is not set */
+    }
+    else {localStorage[name] = content;}
+     /* Writing in localStorage. Note that the record name is an identifier that allows you to extract the text entry */
+	/* If you select an existing entry and enter the new text without changing the name entry, there will be editing the recording. 
+	If you change the name of the entry it will actually create a new entry. */
+  }
+}
+
+function listLoad()
+{
+  var list = document.getElementById('notelist');
+   /* We get access to the element - the list of our web-page. */
+  for(var i in localStorage)
+   /* Each loop to iterate the value stored in localStorage, wherein i takes a value stored identifier data, i.e. in our example, the variable i contains the name of the recording. */
+  {
+   var a = document.createElement('a'); /* Create a new html-element. */
+   a.setAttribute('onclick', "loadNote('"+i+"'); return false;");
+    /* Determine the attribute onclick. When you click it will be called loadNote function with parameter recording names. */
+   a.innerText = i;
+    /* Defines the value of the link text equivalent name records. */
+   var element = document.createElement('li');
+    /* Create a new html-element - list item. */
+   element.appendChild(a);
+    /* Add a list item child element - link. */
+   list.appendChild(element);
+    /* Add a child element of the list - the list item. */
+  } 
+} 
+
+function loadNote(v)
+{
+  document.getElementById('notecontent').value = localStorage[v];
+   /* Display the text entry. */
+  document.getElementById('notename').value = v;
+   /* Display the name of the recording. */
+}
+
+function deleteNote()
+{
+  var name = document.getElementById('notename').value;
+   /* We obtain the name of the current record from the text field. */
+  if (name != '')
+  {
+  localStorage.removeItem(name);
+   /* Deleting record. Record name used as an identifier. */
+  }
+  else {alert('note not found');}
+   /* Message issued when you try to remove an undefined record. */
+}
+
+	</script>
+		
+</head>
+
+<body onload="listLoad();" >
+  <div id="header">
+   <h1>Editor LocalStorage</h1>
+  </div>
+    
+  <div id="notes">
+   <h3>List entry</h3>
+   <ol id="notelist"></ol>
+  </div>
+  
+  <div id="note">
+   <form id="formnote">
+    
+    <fieldset>
+     <table>
+      <tr>
+       <td><label class="notefield">Name</label></td>
+       <td colspan=2><input id="notename" type="text" class="notefield"></input></td>
+      </tr>
+      <tr>
+       <td><label class="notefield">Text</label></td>
+       <td colspan=2><textarea id="notecontent" rows=10></textarea></td>
+      </tr>
+      
+      <tr>
+       <td></td>
+       <td class="notebtn"><button id="save" type="submit" onclick="saveNote(); ">Save</button></td>
+       <td class="notebtn"><button id="delete" type="submit" onclick="deleteNote();">Delete</button></td>
+      </tr>
+     </table>
+    </fieldset>
+   </form>
+  </div>
+  
+  <div id="footer">
+	<br>
+	<a href="index.html">index1</a>
+	<a href="index2.html">index2</a>
+		
+   <p class="footertext">2016</p>
+  </div>
+ </body>
+ 
+</html>
