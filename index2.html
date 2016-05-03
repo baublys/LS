@@ -11,7 +11,17 @@
 	  <script>
 		$( document ).ready(function() {
 		  $("#localText").text( localStorage.getItem("TextEntryName") );
-		  $("#localImage").attr("src", localStorage.getItem("ImageEntryName") );
+			var ls = localStorage.getItem("ImageEntryName");
+<!-- 			console.log("localStorage.getItem(\"ImageEntryName\") = " + ls);
+ -->			
+			var from = 5;
+			var to = 5000000;
+			$newls = ls.substring(from,to);
+			console.log("$newls = " + $newls);
+<!-- 		  $("#localImage").attr("src", localStorage.getItem("ImageEntryName") ); -->
+				$newnewls = "data:image/jpeg;" + $newls;
+				console.log("$newnewls = " + $newnewls);
+				$("#localImage").attr("src", $newnewls );
 		});
 	  </script>
 	  
